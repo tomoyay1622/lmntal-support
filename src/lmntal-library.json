@@ -1,0 +1,10 @@
+{
+  "io.stdin": {
+    "signature": "io.stdin(-RetRort)",
+    "description": "Returns a standard input port."
+  },
+  "io.stdout": {
+    "signature": "io.stdout(-RetRort)",
+    "description": "Returns a standard output port."
+  }
+}
