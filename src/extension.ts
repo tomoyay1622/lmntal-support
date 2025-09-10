@@ -40,7 +40,7 @@ export function activate(context: vscode.ExtensionContext) {
         provideHover(document, position, token) {
             
             // カーソル位置にある単語の範囲を取得
-            const range = document.getWordRangeAtPosition(position);
+            const range = document.getWordRangeAtPosition(position, /[a-zA-Z0-9_.]+/);
             if (!range) {
                 return;
             }
