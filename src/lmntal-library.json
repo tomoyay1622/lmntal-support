@@ -74,5 +74,97 @@
   "io.output_string": {
     "signature": "io.output_string(+Port, -RetRort, -Str)",
     "description": "Dumps the current content of the string port Port to Str and returns the port as RetRort (without flushing it)."
+  },
+  "array.new": {
+      "signature": "array.new(+List, -NewArray)",
+      "description": "Creates an array with the elements in List and returns it to NewArray."
+    },
+    "array.free": {
+      "signature": "array.free(+Array)",
+      "description": "Frees Array."
+    },
+    "array.size": {
+      "signature": "array.size(+Array, -N, -NewArray)",
+      "description": "Returns the size of Array to N and the array itself to NewArray."
+    },
+    "array.get": {
+      "signature": "array.get(+Array, +I, -Old, -NewArray)",
+      "description": "Returns the Ith element of Array to Old and the array itself to NewArray."
+    },
+    "array.put": {
+      "signature": "array.put(+Array, +I, +New, -NewArray)",
+      "description": "Returns an array with the Ith element of Array replaced by New to NewArray."
+    },
+    "atom.new/2": {
+    "signature": "atom.new(+F, +N, -A)",
+    "description": "Creates a new atom with functor F and arity N, returns it as A."
+  },
+  "atom.new/3": {
+    "signature": "atom.new(+F, +L, -A)",
+    "description": "Creates a new atom with functor F and link list L, returns it as A."
+  },
+  "atom.functor": {
+    "signature": "atom.functor(+A0, -F, -N, -A)",
+    "description": "Returns the functor F and arity N of atom A0, and a new atom A."
+  },
+  "atom.swap": {
+    "signature": "atom.swap(+A0, +I, +NewAi, -OldAi, -A)",
+    "description": "Swaps the I-th link of atom A0 with NewAi, returns the old link OldAi and a new atom A."
+  },
+  "list.append": {
+    "signature": "list.append(+List1, +List2, -Res)",
+    "description": "Appends List2 to List1 and returns the result in Res."
+  },
+  "list.choose_k": {
+    "signature": "list.choose_k(+List, +K, -Res)",
+    "description": "Chooses K elements from List and returns them in Res."
+  },
+  "list.split": {
+    "signature": "list.split(+List, +N, -Tail, -Head)",
+    "description": "Splits List at position N into Head and Tail."
+  },
+  "list.reverse": {
+    "signature": "list.reverse(+List, -ReversedList)",
+    "description": "Reverses List and returns the result in ReversedList."
+  },
+  "list.flatten": {
+    "signature": "list.flatten(+List, -Res)",
+    "description": "Flattens nested List into a single-level list Res."
+  },
+  "string.from": {
+    "signature": "string.from(+Atom, -Res)",
+    "description": "Converts Atom to a string and returns it in Res."
+  },
+  "string.concat": {
+    "signature": "string.concat(+Str1, +Str2, -Res)",
+    "description": "Concatenates Str1 and Str2 and returns the result in Res."
+  },
+  "string.substr/2": {
+    "signature": "string.substr(+Str, +K, -Res)",
+    "description": "Extracts substring from Str starting at position K and returns it in Res."
+  },
+  "string.substr/3": {
+    "signature": "string.substr(+Str, +B, +E, -Res)",
+    "description": "Extracts substring from Str between positions B and E and returns it in Res."
+  },
+  "string.reverse": {
+    "signature": "string.reverse(+Str, -ReversedStr)",
+    "description": "Reverses Str and returns the result in ReversedStr."
+  },
+  "string.compress": {
+    "signature": "string.compress(+List, -String)",
+    "description": "Compresses a list of characters into a string and returns it in String."
+  },
+  "string.explode": {
+    "signature": "string.explode(+String, -List)",
+    "description": "Explodes a string into a list of characters and returns it in List."
+  },
+  "string.times": {
+    "signature": "string.times(+Str, +N, -Res)",
+    "description": "Repeats Str N times and returns the result in Res."
+  },
+  "string.join": {
+    "signature": "string.join(+Glue, +StrList, -Res)",
+    "description": "Joins the strings in StrList using Glue and returns the result in Res."
   }
 }
