@@ -23,7 +23,8 @@
         ],
         "extensions": [
           ".lmn"
-        ]
+        ],
+        "configuration": "./language-configuration.json"
       }
     ],
     "commands": [

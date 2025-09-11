@@ -24,6 +24,8 @@ export function activate(context: vscode.ExtensionContext) {
 	// This line of code will only be executed once when your extension is activated
 	console.log('Congratulations, your extension "lmntal-hover-support" is now active!');
 
+    console.log('Congratulations, your extension "lmntal-completion" is now active!');
+
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with registerCommand
 	// The commandId parameter must match the command field in package.json
@@ -68,7 +70,39 @@ export function activate(context: vscode.ExtensionContext) {
         }
     });
 
+    const provider = vscode.languages.registerCompletionItemProvider('lmntal', {
+
+        provideCompletionItems(document: vscode.TextDocument, position: vscode.Position) {
+
+            // 1. 現在のファイルから全てのテキストを取得
+            const text = document.getText();
+
+            // 2. 正規表現で単語を抽出
+            // LMNtalのAtomNameやLinkNameに合致しそうなパターン
+            // 例: 英小文字で始まり、英数字とアンダースコアが続く単語
+            const wordPattern = /[a-z][a-zA-Z0-9_]*/g;
+            const words = text.match(wordPattern);
+
+            // 3. 候補リストを作成 (重複をなくす)
+            if (!words) {
+                return []; // 単語が見つからなければ空のリストを返す
+            }
+
+            // Setを使って重複を排除し、その後配列に戻す
+            const uniqueWords = [...new Set(words)];
+
+            // 4. VSCodeが要求するCompletionItemの形式に変換
+            const completionItems = uniqueWords.map(word => {
+                const item = new vscode.CompletionItem(word, vscode.CompletionItemKind.Text);
+                return item;
+            });
+
+            return completionItems;
+        }
+    });
+
 	context.subscriptions.push(hoverProvider);
+	context.subscriptions.push(provider);
 }
 
 // This method is called when your extension is deactivated
