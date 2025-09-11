@@ -6,5 +6,73 @@
   "io.stdout": {
     "signature": "io.stdout(-RetRort)",
     "description": "Returns a standard output port."
+  },
+  "io.stderr": {
+    "signature": "io.stderr(-RetRort)",
+    "description": "Returns a standard error port."
+  },
+  "io.read_byte": {
+    "signature": "io.read_byte(+Port, -RetRort, -N)",
+    "description": "Read a character from the input port Port and returns its code N and a new port RetRort. Returns -1 instead of N if the end of file is encountered."
+  },
+  "io.read_char": {
+    "signature": "io.read_char(+Port, -RetRort, -C)",
+    "description": "Read a character C from the input port Port and returns it as a unary atom with the name C a new port RetRort. Returns a unary atom 'eof' if the end of file is encountered."
+  },
+  "io.read_token": {
+    "signature": "io.read_token(+Port, -RetRort, -Str)",
+    "description": "Read a token Str separated by a space or a tab or a newline from the input port Port and returns the token and a new port RetRort. Returns a unary atom 'eof' if the end of file is encountered."
+  },
+  "io.read_line": {
+    "signature": "io.read_line(+Port, -RetRort, -Str)",
+    "description": "Read a single line Str from the input port Port and returns a new port RetRort."
+  },
+  "io.close_port": {
+    "signature": "io.close_port(+Port, -RetRort)",
+    "description": "Close Port and returns it as RetRort. Further operations on the port will cause an error."
+  },
+  "io.free_port": {
+    "signature": "io.free_port(+Port)",
+    "description": "Frees Port."
+  },
+  "io.print_byte": {
+    "signature": "io.print_byte(+Port, +N, -RetRort)",
+    "description": "Print the character with the code N to Port and return a new port RetRort."
+  },
+  "io.print_unary": {
+    "signature": "io.print_unary(+Port, +C, -RetRort)",
+    "description": "Print the name of a unary atom C to Port and return a new port RetRort."
+  },
+  "io.print_char": {
+    "signature": "io.print_char(+Port, +C, -RetRort)",
+    "description": "Print the name of an atom C to Port and return a new port RetRort. The atom name need not necessarily be a single character."
+  },
+  "io.print": {
+    "signature": "io.print(+Port, +Str, -RetRort)",
+    "description": "Print a string Str to Port and return a new port RetRort."
+  },
+  "io.print_line": {
+    "signature": "io.print_line(+Port, +Str, -RetRort)",
+    "description": "Print a string Str and a newline to Port and return a new port RetRort."
+  },
+  "io.print_newline": {
+    "signature": "io.print_newline(+Port, -RetRort)",
+    "description": "Print a newline to Port and return a new port RetRort."
+  },
+  "io.print_mem": {
+    "signature": "io.print_mem(+Port, +M, -RetRort)",
+    "description": "Print the content of the membrane M to Port and return a new port RetRort. The membrane must not have free links other than that linked to this API."
+  },
+  "io.open_output_string": {
+    "signature": "io.open_output_string(-SRetRort)",
+    "description": "Creates a new string output port SRetRort."
+  },
+  "io.open_input_string": {
+    "signature": "io.open_input_string(+Str, -SRetRort)",
+    "description": "Creates a new string input port SRetRort consisting of the characters in the string Str."
+  },
+  "io.output_string": {
+    "signature": "io.output_string(+Port, -RetRort, -Str)",
+    "description": "Dumps the current content of the string port Port to Str and returns the port as RetRort (without flushing it)."
   }
 }
