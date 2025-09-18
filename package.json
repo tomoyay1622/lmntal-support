@@ -1,6 +1,6 @@
 {
-  "name": "lmntal-hover-support",
-  "displayName": "lmntal-hover-support",
+  "name": "lmntal-support",
+  "displayName": "lmntal-support",
   "description": "Provides hover information for LMNtal.",
   "version": "0.0.1",
   "engines": {
@@ -29,7 +29,7 @@
     ],
     "commands": [
       {
-        "command": "lmntal-hover-support.helloWorld",
+        "command": "lmntal-support.helloWorld",
         "title": "Hello World"
       }
     ]
