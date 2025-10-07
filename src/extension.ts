@@ -1,11 +1,10 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
+// VS Code の拡張 API
 import * as vscode from 'vscode';
 
-// 作成したJSONファイルをインポート
+// ライブラリ定義の JSON を読み込む
 import * as libraryFunctions from './lmntal-library.json';
 
-// 型定義で補完を効かせる（任意ですが推奨）
+// 型定義（補完用）
 type LmnatalLibrary = {
     [key: string]: {
         signature: string;
@@ -21,32 +20,24 @@ const lmntalLibrary: LmnatalLibrary = libraryFunctions;
 const userDefinedSymbols = new Map<string, vscode.SymbolInformation>();
 
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
+// 拡張機能が有効化されたときに呼ばれる
 export function activate(context: vscode.ExtensionContext) {
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "lmntal-support" is now active!');
+    console.log('lmntal-support が有効化されました。');
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-
-	// LMNtal言語ファイルに対してホバー機能を提供することを登録
+    // ホバー情報の登録
     const hoverProvider = vscode.languages.registerHoverProvider('lmntal', {
 
         // provideHoverメソッド: ユーザーが単語にマウスホバーしたときに呼び出される
         provideHover(document, position, token) {
-            
-            // カーソル位置にある単語の範囲を取得
+
+            // カーソル位置の単語を取得
             const wordPattern = /[a-zA-Z0-9_.]+/;
             const range = document.getWordRangeAtPosition(position, wordPattern);
             if (!range) {
                 return;
             }
-            
-            // 範囲から単語（関数名）を取得
+
             const word = document.getText(range);
 
             // 1. まずライブラリ関数を検索して、JSONデータの中から、取得した単語に一致する情報を探す
@@ -83,6 +74,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     context.subscriptions.push(hoverProvider);
 
+    // 補完プロバイダーの登録
     const provider = vscode.languages.registerCompletionItemProvider('lmntal', {
 
         provideCompletionItems(document: vscode.TextDocument, position: vscode.Position) {
@@ -100,7 +92,7 @@ export function activate(context: vscode.ExtensionContext) {
 
             // 3.1 単語が見つからなければ空のリストを返す
             if (!words) {
-                return []; // 
+                return [];
             }
 
             // 3.2 Setを使って重複を排除し、その後配列に戻す
@@ -116,14 +108,14 @@ export function activate(context: vscode.ExtensionContext) {
         }
     });
 
-	context.subscriptions.push(provider);
+    context.subscriptions.push(provider);
 
     // 拡張機能が起動したときに、現在アクティブなエディタがあれば解析
     if (vscode.window.activeTextEditor) {
         updateUserDefinedSymbols(vscode.window.activeTextEditor.document);
     }
 
-    // アクティブなエディタが切り替わったときに解析
+    // エディタ切替時とドキュメント変更時に解析を再実行
     context.subscriptions.push(
         vscode.window.onDidChangeActiveTextEditor(editor => {
             if (editor) {
